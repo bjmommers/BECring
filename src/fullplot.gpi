@@ -1,0 +1,14 @@
+set terminal png font Times 10 size 640,360 enhanced lw 2
+
+set autoscale fix
+set title "1D ring"
+#set xrange[-1:1]
+set yrange [-0.05:0.6]
+set xlabel "x"
+set ylabel "|psi|^2"
+set grid x2tics
+set x2tics 5 format "" scale 0
+set xzeroaxis
+plot "data" using 1:2 with lines title "|psi1|^2",\
+"data" using 1:5 with lines title "V1",\
+"data" using 1:6 with lines title "phase"

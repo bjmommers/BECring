@@ -1,0 +1,11 @@
+#!/usr/bin/gnuplot -c
+#run me with: gnuplot -c statplot.gpi ARG1 ARG2 ARG3; where arguments are in quotes
+set terminal postscript enhanced eps color
+set autoscale fix
+
+set output "trajectory.eps"
+set title "1D simulation"
+set key bottom right
+set xlabel "time"
+#set yrange [-2:2]
+plot ARG1 using 2:4 with lines title "<x>"

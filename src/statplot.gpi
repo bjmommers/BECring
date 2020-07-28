@@ -1,0 +1,43 @@
+#!/usr/bin/gnuplot -c
+#run me with: gnuplot -c statplot.gpi ARG1 ARG2 ARG3; where arguments are in quotes
+set terminal postscript enhanced eps color linewidth 4
+set autoscale fix
+
+set output ARG2."--energy.eps"
+set title ARG3
+set key bottom right
+set xlabel "time"
+#set yrange [-2:2]
+#set y2range [250:500]
+#set y2tics tc lt 1
+plot ARG1 using 2:10 with lines title "<E>"
+#plot ARG1 using 2:4 with lines title "<x>",\
+#axes x1y2
+
+set output ARG2."--Lz.eps"
+set title ARG3
+set key bottom right
+set xlabel "time"
+plot ARG1 using 2:9 with lines title "<Lz>"
+
+
+set output ARG2."--motion.eps"
+set title ARG3
+set key bottom right
+set xlabel "Time [arb. units]"
+set ylabel "x [arb. units]"
+set yrange [-1:1.5]
+plot ARG1 using 2:4 with lines title "<x>",\
+ARG1 using 2:6 with lines title "stdev"
+
+#ARG1 using 2:3 with lines title "norm",\
+#ARG1 using 2:7 with lines title "overlap"
+
+set output ARG2."--overlap.eps"
+set title ARG3
+set key bottom left
+set xlabel "time"
+unset y2range 
+unset y2tics
+set yrange [-0.1:1.1]
+plot ARG1 using 2:7 with lines title "overlap"

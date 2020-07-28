@@ -1,0 +1,13 @@
+set terminal postscript enhanced eps color
+
+
+
+set style data histograms
+set style histogram clustered
+set style fill solid 1.0 border 0
+set output "t0-modeamp-comparison.eps"
+set xlabel "mode number"
+set ylabel "amplitude"
+set key autotitle columnheader
+plot "nonrotating-modeampmatrix-abs.dat" using 2:xticlabels(1) title "non-rotating",\
+"rotating-modeampmatrix-abs.dat" using 2 title "rotating"

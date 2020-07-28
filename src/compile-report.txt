@@ -1,0 +1,299 @@
+In file included from BECring.cpp:36:0:
+bec-headers.h: In function ‘void extractrotation(std::vector<double>&, std::vector<double>&, std::vector<double>&, double, double, int, int, int)’:
+bec-headers.h:615:5: warning: unused parameter ‘imm’ [-Wunused-parameter]
+ int imm
+     ^~~
+In file included from BECring.cpp:36:0:
+bec-headers.h: In function ‘void multicolfp(std::__cxx11::string, std::vector<double>&, int, std::__cxx11::string)’:
+bec-headers.h:705:11: warning: unused variable ‘k’ [-Wunused-variable]
+     int j,k;
+           ^
+bec-headers.h: In function ‘std::vector<double> initialisethreemode(std::vector<std::complex<double> >&, std::vector<double>&, double, double, double, double, int, double, double, double, double)’:
+bec-headers.h:854:12: warning: unused variable ‘xstep’ [-Wunused-variable]
+     double xstep = x[1] - x[0];
+            ^~~~~
+bec-headers.h:840:9: warning: unused parameter ‘tmphase’ [-Wunused-parameter]
+  double tmphase,
+         ^~~~~~~
+bec-headers.h: In function ‘void addmodekick(std::vector<std::complex<double> >&, std::vector<double>&, double, double, double, int)’:
+bec-headers.h:938:9: warning: unused parameter ‘x0’ [-Wunused-parameter]
+  double x0,
+         ^~
+bec-headers.h: In function ‘void calcstats(std::vector<std::complex<double> >&, std::vector<std::complex<double> >&, std::vector<double>&, std::vector<double>&, std::vector<double>&, double, int, double, int, double)’:
+bec-headers.h:1197:21: warning: variable ‘i’ set but not used [-Wunused-but-set-variable]
+     complex<double> i = {0.0,1.0};
+                     ^
+bec-headers.h:1182:8: warning: unused parameter ‘omegaou’ [-Wunused-parameter]
+ double omegaou
+        ^~~~~~~
+bec-headers.h: In function ‘void calcstats(std::vector<std::complex<double> >&, std::vector<std::complex<double> >&, std::vector<double>&, std::vector<double>&, std::vector<double>&, double, int, double, int, int, double)’:
+bec-headers.h:1288:12: warning: variable ‘lzexpect’ set but not used [-Wunused-but-set-variable]
+     double lzexpect = 0.0; // expectation value of Lz
+            ^~~~~~~~
+bec-headers.h:1289:21: warning: variable ‘i’ set but not used [-Wunused-but-set-variable]
+     complex<double> i = {0.0,1.0};
+                     ^
+bec-headers.h:1290:12: warning: unused variable ‘beta’ [-Wunused-variable]
+     double beta = sqrt(hbar/(rbmass*omegaou));
+            ^~~~
+bec-headers.h: In function ‘void addtdpotential(std::vector<double>&, std::vector<double>&, std::vector<std::complex<double> >&, std::vector<std::complex<double> >&, double, double, int, int, double, double, double, double, int, double, double, double, double)’:
+bec-headers.h:1741:9: warning: unused variable ‘j’ [-Wunused-variable]
+     int j, Nx = x.size();
+         ^
+bec-headers.h:1741:12: warning: unused variable ‘Nx’ [-Wunused-variable]
+     int j, Nx = x.size();
+            ^~
+bec-headers.h:1726:8: warning: unused parameter ‘sigma’ [-Wunused-parameter]
+ double sigma,
+        ^~~~~
+bec-headers.h:1736:8: warning: unused parameter ‘omegaou’ [-Wunused-parameter]
+ double omegaou,
+        ^~~~~~~
+bec-headers.h: In function ‘void addnonlinearity(std::vector<double>&, std::vector<std::complex<double> >&, double)’:
+bec-headers.h:1812:12: warning: unused variable ‘result’ [-Wunused-variable]
+     double result;
+            ^~~~~~
+bec-headers.h: In function ‘void calcVimprint(std::vector<double>&, std::vector<double>&, std::vector<std::complex<double> >&, int, int, double, double, double, double)’:
+bec-headers.h:1850:28: warning: unused parameter ‘psi1’ [-Wunused-parameter]
+ vector< complex<double> > &psi1, //one component
+                            ^~~~
+bec-headers.h:1854:8: warning: unused parameter ‘gii’ [-Wunused-parameter]
+ double gii,
+        ^~~
+bec-headers.h: In function ‘void calcVimprint(std::vector<double>&, std::vector<double>&, std::vector<std::complex<double> >&, std::vector<std::complex<double> >&, int, int, double, double, double, double, double)’:
+bec-headers.h:1987:23: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+             for (j=0;j<Nx;j++)
+                      ~^~~
+bec-headers.h:1995:23: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+             for (j=0;j<Nx;j++)
+                      ~^~~
+bec-headers.h:2003:23: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+             for (j=0;j<Nx;j++)
+                      ~^~~
+bec-headers.h:2013:22: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+             for(j=0;j<Nx;j++)
+                     ~^~~
+bec-headers.h:2029:23: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+             for (j=0;j<Nx;j++)
+                      ~^~~
+bec-headers.h:2039:22: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+             for(j=0;j<Nx;j++)
+                     ~^~~
+bec-headers.h:2048:23: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+             for (j=0;j<Nx;j++)
+                      ~^~~
+bec-headers.h:1943:28: warning: unused parameter ‘psi1’ [-Wunused-parameter]
+ vector< complex<double> > &psi1,
+                            ^~~~
+bec-headers.h:1944:28: warning: unused parameter ‘psi2’ [-Wunused-parameter]
+ vector< complex<double> > &psi2, //two-component
+                            ^~~~
+bec-headers.h:1948:8: warning: unused parameter ‘gii’ [-Wunused-parameter]
+ double gii,
+        ^~~
+bec-headers.h:1949:8: warning: unused parameter ‘gij’ [-Wunused-parameter]
+ double gij,
+        ^~~
+bec-headers.h: In function ‘std::complex<double> fixedmodedensityfourierint(std::vector<std::complex<double> >&, std::vector<double>&, double)’:
+bec-headers.h:2279:12: warning: unused variable ‘xstep’ [-Wunused-variable]
+     double xstep = x[1]-x[0];
+            ^~~~~
+bec-headers.h: In function ‘void vecmax(std::vector<double>&, std::vector<int>&)’:
+bec-headers.h:2480:14: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+     for(j=1;j<vec.size()-1;j++)
+             ~^~~~~~~~~~~~~
+bec-headers.h:2471:9: warning: unused variable ‘maxindex’ [-Wunused-variable]
+     int maxindex = 0;
+         ^~~~~~~~
+bec-headers.h:2472:9: warning: unused variable ‘maxcount’ [-Wunused-variable]
+     int maxcount = 0;
+         ^~~~~~~~
+bec-headers.h: In function ‘std::__cxx11::string makeheader(std::vector<double>)’:
+bec-headers.h:2507:14: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+     for(j=0;j<freqvec.size();j++)
+             ~^~~~~~~~~~~~~~~
+bec-headers.h: In function ‘void printconversions(double, double, double, double, double, int, double, double, double, double)’:
+bec-headers.h:2526:5: warning: unused parameter ‘ouselect’ [-Wunused-parameter]
+ int ouselect,
+     ^~~~~~~~
+bec-headers.h:2528:8: warning: unused parameter ‘xmax’ [-Wunused-parameter]
+ double xmax,
+        ^~~~
+bec-headers.h:2529:8: warning: unused parameter ‘xmin’ [-Wunused-parameter]
+ double xmin,
+        ^~~~
+bec-headers.h:2530:8: warning: unused parameter ‘tmax’ [-Wunused-parameter]
+ double tmax
+        ^~~~
+bec-headers.h: In function ‘std::vector<double> threemodeoptimise(double, double, double, double, double, double, double, double)’:
+bec-headers.h:2671:12: warning: variable ‘a0_old’ set but not used [-Wunused-but-set-variable]
+     double a0_old, a_old, delta_old;
+            ^~~~~~
+bec-headers.h:2671:20: warning: variable ‘a_old’ set but not used [-Wunused-but-set-variable]
+     double a0_old, a_old, delta_old;
+                    ^~~~~
+bec-headers.h:2671:27: warning: variable ‘delta_old’ set but not used [-Wunused-but-set-variable]
+     double a0_old, a_old, delta_old;
+                           ^~~~~~~~~
+bec-headers.h: In function ‘double threemodeHexpect_manual(double, double, double, double, double, double)’:
+bec-headers.h:2797:9: warning: unused parameter ‘alpha’ [-Wunused-parameter]
+  double alpha   //imprinting potential amplitude
+         ^~~~~
+bec-headers.h: In function ‘std::vector<double> strobo_rot_measurement(std::vector<double>&, std::vector<double>&, double, double, double, double, double, int)’:
+bec-headers.h:2910:9: warning: unused variable ‘index’ [-Wunused-variable]
+     int index;
+         ^~~~~
+bec-headers.h:2900:9: warning: unused parameter ‘omega’ [-Wunused-parameter]
+  double omega,
+         ^~~~~
+bec-headers.h: In function ‘std::vector<double> strobo_rot_measurement(std::vector<double>&, std::vector<double>&, double, double, double, double, double, double, int)’:
+bec-headers.h:2969:9: warning: unused variable ‘index’ [-Wunused-variable]
+     int index;
+         ^~~~~
+In file included from BECring.cpp:37:0:
+shermanmorrison.h: In function ‘int osoevo(std::vector<double>&, std::vector<double>&, std::vector<std::complex<double> >&, std::vector<std::complex<double> >&, int, int, double, int, double, double, double, double, double, double, double, double, int, double, double, double, int, int, double, double, std::vector<std::complex<double> >&, std::vector<std::complex<double> >&, std::vector<std::complex<double> >&, std::vector<std::complex<double> >&, std::vector<std::complex<double> >&, std::complex<double>, std::complex<double>, std::complex<double>, std::vector<std::complex<double> >&, std::vector<std::complex<double> >&, int, std::vector<std::complex<double> >&, int, double)’:
+shermanmorrison.h:97:12: warning: variable ‘alt_tstep’ set but not used [-Wunused-but-set-variable]
+     double alt_tstep = tstep;
+            ^~~~~~~~~
+shermanmorrison.h:37:17: warning: unused parameter ‘x’ [-Wunused-parameter]
+ vector<double> &x,
+                 ^
+shermanmorrison.h:39:28: warning: unused parameter ‘psi1’ [-Wunused-parameter]
+ vector< complex<double> > &psi1,
+                            ^~~~
+shermanmorrison.h:40:28: warning: unused parameter ‘psi2’ [-Wunused-parameter]
+ vector< complex<double> > &psi2, //two-component
+                            ^~~~
+shermanmorrison.h:41:5: warning: unused parameter ‘impot’ [-Wunused-parameter]
+ int impot,
+     ^~~~~
+shermanmorrison.h:42:5: warning: unused parameter ‘imm’ [-Wunused-parameter]
+ int imm,
+     ^~~
+shermanmorrison.h:43:8: warning: unused parameter ‘fweight’ [-Wunused-parameter]
+ double fweight,
+        ^~~~~~~
+shermanmorrison.h:44:5: warning: unused parameter ‘rt’ [-Wunused-parameter]
+ int rt,
+     ^~
+shermanmorrison.h:45:8: warning: unused parameter ‘gii’ [-Wunused-parameter]
+ double gii,
+        ^~~
+shermanmorrison.h:46:8: warning: unused parameter ‘gij’ [-Wunused-parameter]
+ double gij,
+        ^~~
+shermanmorrison.h:47:8: warning: unused parameter ‘omega1’ [-Wunused-parameter]
+ double omega1,
+        ^~~~~~
+shermanmorrison.h:48:8: warning: unused parameter ‘omega2’ [-Wunused-parameter]
+ double omega2,
+        ^~~~~~
+shermanmorrison.h:50:8: warning: unused parameter ‘potamp’ [-Wunused-parameter]
+ double potamp,
+        ^~~~~~
+shermanmorrison.h:51:8: warning: unused parameter ‘sigma’ [-Wunused-parameter]
+ double sigma,
+        ^~~~~
+shermanmorrison.h:52:8: warning: unused parameter ‘gdepth’ [-Wunused-parameter]
+ double gdepth,
+        ^~~~~~
+shermanmorrison.h:53:5: warning: unused parameter ‘husimitype’ [-Wunused-parameter]
+ int husimitype,
+     ^~~~~~~~~~
+shermanmorrison.h:54:8: warning: unused parameter ‘imprintamp’ [-Wunused-parameter]
+ double imprintamp,
+        ^~~~~~~~~~
+shermanmorrison.h:55:8: warning: unused parameter ‘impoffset’ [-Wunused-parameter]
+ double impoffset,
+        ^~~~~~~~~
+shermanmorrison.h:56:8: warning: unused parameter ‘impsigma’ [-Wunused-parameter]
+ double impsigma,
+        ^~~~~~~~
+shermanmorrison.h:57:5: warning: unused parameter ‘imprinttype’ [-Wunused-parameter]
+ int imprinttype,
+     ^~~~~~~~~~~
+shermanmorrison.h:58:5: warning: unused parameter ‘imptimeprofile’ [-Wunused-parameter]
+ int imptimeprofile,
+     ^~~~~~~~~~~~~~
+shermanmorrison.h:59:8: warning: unused parameter ‘omegaou’ [-Wunused-parameter]
+ double omegaou,
+        ^~~~~~~
+shermanmorrison.h:60:8: warning: unused parameter ‘printoffset’ [-Wunused-parameter]
+ double printoffset,
+        ^~~~~~~~~~~
+BECring.cpp: In function ‘int main(int, char**)’:
+BECring.cpp:1083:14: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+     for(k=0;k<(istatsmatrix.size()/aggstatvec.size());k++)
+             ~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+BECring.cpp:1372:14: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+     for(j=0;j<phasesingle.size();j++)
+             ~^~~~~~~~~~~~~~~~~~~
+BECring.cpp:1387:14: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+     for(j=0;j<rotationmeasurement.size();j++)
+             ~^~~~~~~~~~~~~~~~~~~~~~~~~~~
+BECring.cpp:50:28: warning: variable ‘ierr’ set but not used [-Wunused-but-set-variable]
+  int Nx, Nt, Nit, tc, ani, ierr, ite, modulus, numco, inbetween = 0;
+                            ^~~~
+BECring.cpp:59:14: warning: variable ‘k02’ set but not used [-Wunused-but-set-variable]
+  double k01, k02;
+              ^~~
+BECring.cpp:62:9: warning: unused variable ‘x01ou’ [-Wunused-variable]
+  double x01ou, x02ou;
+         ^~~~~
+BECring.cpp:62:16: warning: unused variable ‘x02ou’ [-Wunused-variable]
+  double x01ou, x02ou;
+                ^~~~~
+BECring.cpp:65:9: warning: unused variable ‘xlowerou’ [-Wunused-variable]
+  double xlowerou, xupperou, xstepou;
+         ^~~~~~~~
+BECring.cpp:65:19: warning: unused variable ‘xupperou’ [-Wunused-variable]
+  double xlowerou, xupperou, xstepou;
+                   ^~~~~~~~
+BECring.cpp:65:29: warning: unused variable ‘xstepou’ [-Wunused-variable]
+  double xlowerou, xupperou, xstepou;
+                             ^~~~~~~
+BECring.cpp:66:22: warning: unused variable ‘time’ [-Wunused-variable]
+  double tstep, tmax, time;
+                      ^~~~
+BECring.cpp:67:9: warning: unused variable ‘tstepou’ [-Wunused-variable]
+  double tstepou, tmaxou, timeou;
+         ^~~~~~~
+BECring.cpp:67:18: warning: unused variable ‘tmaxou’ [-Wunused-variable]
+  double tstepou, tmaxou, timeou;
+                  ^~~~~~
+BECring.cpp:67:26: warning: unused variable ‘timeou’ [-Wunused-variable]
+  double tstepou, tmaxou, timeou;
+                          ^~~~~~
+BECring.cpp:69:12: warning: unused variable ‘dfreq’ [-Wunused-variable]
+     double dfreq;
+            ^~~~~
+BECring.cpp:70:34: warning: variable ‘tgamma’ set but not used [-Wunused-but-set-variable]
+     double omegaimag, omegareal, tgamma;
+                                  ^~~~~~
+BECring.cpp:71:12: warning: unused variable ‘omegaimagou’ [-Wunused-variable]
+     double omegaimagou, omegarealou;
+            ^~~~~~~~~~~
+BECring.cpp:71:25: warning: unused variable ‘omegarealou’ [-Wunused-variable]
+     double omegaimagou, omegarealou;
+                         ^~~~~~~~~~~
+BECring.cpp:74:23: warning: unused variable ‘sum’ [-Wunused-variable]
+     double imtcutoff, sum;
+                       ^~~
+BECring.cpp:76:12: warning: unused variable ‘unitlength’ [-Wunused-variable]
+     double unitlength, unittime, unitenergy, omegaou;
+            ^~~~~~~~~~
+BECring.cpp:76:24: warning: unused variable ‘unittime’ [-Wunused-variable]
+     double unitlength, unittime, unitenergy, omegaou;
+                        ^~~~~~~~
+BECring.cpp:76:34: warning: unused variable ‘unitenergy’ [-Wunused-variable]
+     double unitlength, unittime, unitenergy, omegaou;
+                                  ^~~~~~~~~~
+BECring.cpp:77:21: warning: unused variable ‘g22conv’ [-Wunused-variable]
+     double g11conv, g22conv, g12conv;
+                     ^~~~~~~
+BECring.cpp:77:30: warning: unused variable ‘g12conv’ [-Wunused-variable]
+     double g11conv, g22conv, g12conv;
+                              ^~~~~~~
+BECring.cpp:80:12: warning: variable ‘omegatemp’ set but not used [-Wunused-but-set-variable]
+     double omegatemp;
+            ^~~~~~~~~

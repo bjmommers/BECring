@@ -1,0 +1,181 @@
+######## SPACETIME DISCRETISATION ########
+# spatial grid lower bound, xlower
+-20.0
+# spatial grid upper bound, xupper
+20.0
+# number of spatial grid points, Nx
+200
+# final time, tmax
+15.0
+# timestep (set to 0 to use stable value for Crank-Nicolson scheme), tstep
+0.0
+# number of real time timesteps (set to 0 for automatic calculation), Nt
+0
+
+
+######## IMAGINARY TIME #########
+# max number of imaginary timesteps, Nit
+5000
+# imaginary time similarity cutoff, imtcutoff
+1e-8
+# export ground state filename, "none" to not export
+none
+
+
+####### CONDENSATE PARAMETERS ########
+# number of components, numco
+1
+# use 1D (1) or 3D (3) interaction parameters below?, gdim
+1
+# component 1 interaction strength, a11
+0.0
+# component 2 interaction strength, a22
+0.0
+# inter-component interaction strength, a12
+0.0
+
+
+######## INITIAL STATE ########
+# initial state file to use (single-component only for now)
+none
+# component 1 wavepacket initial momentum kick, k01
+0.0
+# component 2 wavepacket initial momentum kick, k02
+0.0
+# component 1 initial Gaussian width (0 for flat), sigma01
+1.0
+# component 2 initial Gaussian width (0 for flat), sigma02
+0.0
+# component 1 initial <x> position, x01
+0.0
+# component 2 initial <x> position, x02
+0.0
+
+
+######## 1D HUSIMI POTENTIAL ########
+# static trap type: 0=none, 1=harmonic, 2=Gaussian; husimitype
+1
+# Gaussian width sigma, husimisigma
+0.05
+# Gaussian depth, husimigdepth
+1.0
+# harmonic potential frequency in osc. units, omega1
+# set to zero to remove harmonic potential
+#1.4142135623730950488
+1.0
+# husimi potential oscillation frequency in osc. units, omega2
+# set to zero with nonzero omega1 for a regular harmonic potential
+1.5
+# potential scaling amplitude (scales Husimi driving and imprint), potamp
+-0.5
+
+
+######## ANIMATION ########
+# produce data files for animation? 0=no/1=yes, ani
+1
+
+
+######## DAMPING ########
+# perform damping via single-frame imaginary time evolution?, ite
+0
+# number of real time frames before an imaginary time frame, modulus
+1000
+
+
+######## RING PARAMETERS AND UNIT CONVERSIONS ########
+# ring radius in microns, ringrad
+50.0
+# in-plane (z) trapping frequency in Hz, ztrapfreq
+100.0
+# radial trapping frequency in Hz, rtrapfreq
+86.0
+# use radial (=1), z (=2), or Husimi (=3,not implemented) trap frequency for oscillator units?, ouselect
+2
+
+
+######## IMPRINTING POTENTIAL #############
+# imprinting potential selection, impot (0=none,1=propeller,2=sinusoid,3=Gaussian comb,4=polynomial sin/square approximation,5=harmonic potential using mode number as frequency, amplitude as centre,6=alternate sinusoid, 1-imprintamp*cos(imm*theta))
+0
+# mode number, imm (e.g. number of propeller 'blades')
+5
+# half of the order of the polynomial approximation, fweight, e.g. 2 >> x^4; higher = more square
+1.0
+# imprinting potential amplitude (in oscillator units), imprintamp
+0.1
+# imprint in imaginary (=0) or real (=1) time or both (=2)?, imprinttype
+0
+# real time imprinting temporal profile (0=Gaussian,...), imptimeprofile
+0
+# real time imprinting offset (e.g. central peak location in time), impoffset
+0.2
+# real time imprinting Gaussian width, impsigma
+0.05
+
+
+######## ROTATING FRAMES ########
+# imaginary time rotation frequency, omegaimag
+0.025
+# real time rotation rate, omegareal
+0.025
+# damping rate, tgamma #NOT YET IMPLEMENTED
+0.0
+# rotate in imaginary time?, irotate
+0
+#rotate in real time?, rrotate
+0
+
+
+######## 3-MODE INITIAL STATE ########
+# initial state override, threemode
+0
+# phase shift, tmphase
+0.0
+#0.785398163
+#1.570796327
+#background mode amplitdue, bgmode
+0.99989392
+# proportion of amplitude for modulations (ie 1-background), modprop
+0.0102
+# proportion to bias +- primary mode amplitudes, modebias
+0.000
+# gradient-descent grid resolution (for finding lowest-energy parameters), res
+1e-8
+
+
+######## PHASE EXTRACTION ########
+#rotation rate cutoff threshold, threshold
+1.0
+#number of phase extraction mode numbers (0 to use all listed), nfreq
+0
+#list of phase extraction mode numbers (newline-separated),fourierlist
+-15
+-14
+-13
+-12
+-11
+-10
+-9
+-8
+-7
+-6
+-5
+-4
+-3
+-2
+-1
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15

@@ -1,0 +1,19 @@
+set terminal gif animate loop 0
+set autoscale fix
+set title "1D ring"
+#set xrange [0:0.000005]
+set yrange [-0.05:0.25]
+set xlabel "x"
+set ylabel "|psi|^2"
+set grid x2tics
+set x2tics 5 format "" scale 0
+set xzeroaxis
+plot "data" using 1:2 with lines title "|psi1|^2",\
+"data" using 1:5 with lines title "V1",\
+"data" using 1:6 with lines title "phase"
+
+#"data" using 1:3 with lines title "Re(psi1)",\
+#"data" using 1:4 with lines title "Im(psi1)"
+#"data" using 1:6 with lines title "|psi2|^2",\
+#"data" using 1:9 with lines title "V2"
+#"data" using 1:12 with lines title "fft(|psi|^2)"

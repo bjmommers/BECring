@@ -1,0 +1,13 @@
+set terminal png font Times 10 size 640,360 enhanced lw 2
+set autoscale fix
+set title "1D ring"
+#set xrange [0:0.000005]
+set yrange [-0.5:1.5]
+set xlabel "x"
+set ylabel "|psi|^2"
+#set grid x2tics
+#set x2tics 1 format "" scale 0
+#set style line 1 lw 5 lc default
+#set style line 2 lw 5 lc default
+plot "data" using 1:2 with lines title "|psi1|^2",\
+"data" using 1:5 with lines title "V1"

@@ -1,0 +1,37 @@
+set terminal postscript enhanced eps color
+set autoscale fix
+set output "phasext.eps"
+set title "Density Fourier transform phase angle"
+
+set xlabel "t"
+set ylabel "phase"
+
+set key autotitle columnhead
+N=`awk 'NR==1 {print NF}' phasext.dat`
+plot for [i=2:N] "phasext.dat" using 1:i with lines title sprintf("k%2d",i-1)
+
+########################
+
+set output "rotation.eps"
+set autoscale fix
+set title "Extracted rotation rate"
+
+set xlabel "t"
+set ylabel "rotation rate"
+
+set key autotitle columnhead
+N=`awk 'NR==1 {print NF}' rotation.dat`
+plot for [i=2:N] "rotation.dat" using 1:i with lines,\
+    "rotation-measurement.dat"
+
+########################
+
+set output "phase-heat.eps"
+set title "Phase shift"
+set xlabel "mode number"
+set ylabel "time"
+#unset xtics
+unset ytics
+set key autotitle columnhead
+plot "phasext.dat" matrix rowheaders using 1:2:3 with image
+
