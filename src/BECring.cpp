@@ -714,105 +714,9 @@ for(rt=0;rt<2;rt++)
             
             ierr = osoevo(x,potential1,zoldpsi1,zoldpsi2,impot,imm,fweight,rt,g11,g12,omega1,omega2,t*tstep,potamp,husimisigma,husimigdepth,husimitype,imprintamp,impoffset,impsigma,imprinttype,imptimeprofile,omegaou,1.0, zadiag1, zaupper, zalower, zuvec1, zvvec1, zalpha, zbeta, zgamma, zrrhs1, zoldpsi1, Nx, zxsoln1,Nx,tstep);
         }
-/*        
-        //from updatepotential()
-        vector<double> &x,
-        vector<double> &potential,
-        vector< complex<double> > &psi1,
-        vector< complex<double> > &psi2, //two-component
-        int impot,
-        int imm,
-        double fweight,
-        int rt,
-        double gii, 
-        double gij,
-        double omega1, 
-        double omega2, 
-        double t, 
-        double potamp,
-        double sigma,
-        double gdepth,
-        int husimitype,
-        double imprintamp,
-        double impoffset,
-        double impsigma,
-        int imprinttype,
-        int imptimeprofile,
-        double omegaou,
-        double printoffset,
-        vector< complex<double> > &zadiag, 
-        vector< complex<double> > &zaupper, 
-        vector< complex<double> > &zalower,
-        vector< complex<double> > &zuvec,
-        vector< complex<double> > &zvvec,
-        complex<double> alpha,
-        complex<double> beta,
-        complex<double> gamma,
-        vector< complex<double> > &zrrhs,
-        vector< complex<double> > &zoldpsi,
-        int Nx,
-        vector< complex<double> > &zxsoln,
-        int n,
-        double tstep
-        )
-*/
 
-/*
-		// calculate rrhs array with cyclic boundary
-		if((rt == 0) || (inbetween == 1))
-		{
-			calcrrhs(zrrhs1, zoldpsi1, potential1, zialpha, zibeta, zigamma, Nx);
-			if(numco == 2)
-			{
-				calcrrhs(zrrhs2, zoldpsi2, potential2, zialpha, zibeta, zigamma, Nx);
-			}
-		}
-		else if(rt == 1)
-		{
-			calcrrhs(zrrhs1, zoldpsi1, potential1, zalpha, zbeta, zgamma, Nx);
-			if(numco == 2)
-			{
-				calcrrhs(zrrhs2, zoldpsi2, potential2, zalpha, zbeta, zgamma, Nx);
-			}
-		}
-		else
-		{
-			printf("error, rt != 0 or  1. exiting...\n");
-			exit(EXIT_FAILURE);
-		}
 
-		// do Sherman-Morrison - gives new wavefunction in zxsoln array
-		if((rt == 0) || (inbetween == 1))
-		{
-			//component 1
-			ierr = cyctridag(ziadiag1,zialower,ziaupper,zrrhs1,
-									zxsoln1,Nx,ziuvec1,zivvec1);
-			if(ierr != 0){printf("tridag error! exiting...\n");}
 
-			//component 2
-			if(numco == 2)
-			{
-				ierr = cyctridag(ziadiag2,zialower,ziaupper,zrrhs2,
-										zxsoln2,Nx,ziuvec2,zivvec2);
-				if(ierr != 0){printf("tridag error! exiting...\n");}
-			}
-		}
-		else if(rt == 1)
-		{
-			//component 1
-			ierr = cyctridag(zadiag1,zalower,zaupper,zrrhs1,
-									zxsoln1,Nx,zuvec1,zvvec1);
-			if(ierr != 0){printf("tridag error! exiting...\n");}
-
-			//component 2
-			if(numco == 2)
-			{
-				ierr = cyctridag(zadiag2,zalower,zaupper,zrrhs2,
-										zxsoln2,Nx,zuvec2,zvvec2);
-				if(ierr != 0){printf("tridag error! exiting...\n");}
-			}
-		}
-*/
 		// calculate stats, print waveform & potential to file
 		if(rt == 0) 
 		{
@@ -986,52 +890,6 @@ for(rt=0;rt<2;rt++)
 		zoldpsi1[j] = zxsoln1[j];
 		zoldpsi2[j] = zxsoln2[j];
 	}
-/*
-		if(rt == 0)
-		{
-//cout << "About to update potential" << endl;
-			updatepotential(x,potential1,zoldpsi1,zoldpsi2,impot,imm,fweight,rt,g11,g12,omega1,omega2,0,potamp,husimisigma,husimigdepth,husimitype,imprintamp,impoffset,impsigma,imprinttype,imptimeprofile,omegaou,1.0);
-            updatepotential(x,printpotential,zoldpsi1,zoldpsi2,impot,imm,fweight,rt,0.0,0.0,omega1,omega2,0.0,1.0,husimisigma,husimigdepth,husimitype,imprintamp,impoffset,impsigma,imprinttype,imptimeprofile,omegaou,0.0);
-            //cout << "prepping SM vecs for imaginary time" << endl;
-//cout << "About to prep SM vecs" << endl;
-			prepSMvecs(ziadiag1,ziaupper,zialower,ziuvec1,zivvec1, potential1, zialpha, zibeta, zigamma);
-			
-			if(numco == 2)
-			{
-				updatepotential(x,potential2,zoldpsi2,zoldpsi1,impot,imm,fweight,rt,g22,g12,omega1,omega2,t*tstep,potamp,husimisigma,husimigdepth,husimitype,imprintamp,impoffset,impsigma,imprinttype,imptimeprofile,omegaou,1.0);
-				prepSMvecs(ziadiag2,ziaupper,zialower,ziuvec2,zivvec2, potential2, zialpha, zibeta, zigamma);
-			}
-		}
-		else if(inbetween == 1)
-		{
-			updatepotential(x,potential1,zoldpsi1,zoldpsi2,impot,imm,fweight,rt,g11,g12,omega1,omega2,(t-1)*tstep,potamp,husimisigma,husimigdepth,husimitype,imprintamp,impoffset,impsigma,imprinttype,imptimeprofile,omegaou,1.0);
-            updatepotential(x,printpotential,zoldpsi1,zoldpsi2,impot,imm,fweight,rt,0.0,0.0,omega1,omega2,(t-1)*tstep,1.0,husimisigma,husimigdepth,husimitype,imprintamp,impoffset,impsigma,imprinttype,imptimeprofile,omegaou,0.0);
-            //cout << "prepping SM vecs for damped real time" << endl;
-			prepSMvecs(ziadiag1,ziaupper,zialower,ziuvec1,zivvec1, potential1, zialpha, zibeta, zigamma);
-			
-			if(numco == 2)
-			{
-				updatepotential(x,potential2,zoldpsi2,zoldpsi1,impot,imm,fweight,rt,g22,g12,omega1,omega2,(t-1)*tstep,potamp,husimisigma,husimigdepth,husimitype,imprintamp,impoffset,impsigma,imprinttype,imptimeprofile,omegaou,1.0);
-				prepSMvecs(ziadiag2,ziaupper,zialower,ziuvec2,zivvec2, potential2, zialpha, zibeta, zigamma);
-			}
-			
-		}
-		else if((rt == 1) || ((rt == 0) && (t == Nit)))
-		{
-			updatepotential(x,potential1,zoldpsi1,zoldpsi2,impot,imm,fweight,rt,g11,g12,omega1,omega2,t*tstep,potamp,husimisigma,husimigdepth,husimitype,imprintamp,impoffset,impsigma,imprinttype,imptimeprofile,omegaou,1.0);
-            updatepotential(x,printpotential,zoldpsi1,zoldpsi2,impot,imm,fweight,rt,0.0,0.0,omega1,omega2,t*tstep,1.0,husimisigma,husimigdepth,husimitype,imprintamp,impoffset,impsigma,imprinttype,imptimeprofile,omegaou,0.0);
-            //cout << "prepping SM vecs for real time" << endl;
-			prepSMvecs(zadiag1, zaupper, zalower, zuvec1, zvvec1, potential1, zalpha, zbeta, zgamma);
-			
-			if(numco == 2)
-			{
-				updatepotential(x,potential2,zoldpsi2,zoldpsi1,impot,imm,fweight,rt,g22,g12,omega1,omega2,t*tstep,potamp,husimisigma,husimigdepth,husimitype,imprintamp,impoffset,impsigma,imprinttype,imptimeprofile,omegaou,1.0);
-				prepSMvecs(zadiag2,ziaupper,zialower,zuvec2,zvvec2, potential2, zalpha, zbeta, zgamma);
-			}
-		}
-*/
-
-//cout << "About to reset rt if in an in-between frame" << endl;
 
 
 	// reset rt if in real time and doing one frame of imaginary time evo.
@@ -1126,9 +984,9 @@ for(rt=0;rt<2;rt++)
         {
             spacetimefilelabelled << densitytime[(k*Nx)+j] << "\t" ;
         }
+    // Do the last k loop iteration without trailing newline
         spacetimefilelabelled << densitytime[(k*Nx)+(Nx-1)] << endl;
     }
-    // Do the last k loop iteration without trailing newline
     // print time in first column
     spacetimefilelabelled << (Nt-1)*tstep << "\t";
     for(j=0;j<Nx-1;j++)
@@ -1164,7 +1022,6 @@ for(rt=0;rt<2;rt++)
             }
         }
                     modeampmatrixfile << "\n";
-                    //modeampmatrixfile << setw(8) << modeampmatrix[((k-1)*Nt)+(Nt-1)] << "\n";
     }
 
     modeampmatrixfile.close();
@@ -1224,7 +1081,6 @@ for(rt=0;rt<2;rt++)
             }
         }
                     modeampmatrixfile << "\n";
-                   // modeampmatrixfile << real(modeampmatrix[((k-1)*Nt)+(Nt-1)]) << "\t" << imag(modeampmatrix[((k-1)*Nt)+(Nt-1)]) << "\n";
     }
 
     modeampmatrixfile.close();
