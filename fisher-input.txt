@@ -28,7 +28,7 @@ none
 # use 1D (1) or 3D (3) interaction parameters below?, gdim
 1
 # component 1 interaction strength, a11
-5.0
+0.0
 # component 2 interaction strength, a22
 0.0
 # inter-component interaction strength, a12
@@ -43,7 +43,7 @@ none
 # component 2 wavepacket initial momentum kick, k02
 0.0
 # component 1 initial Gaussian width (0 for flat), sigma01
-0.00
+0.0
 # component 2 initial Gaussian width (0 for flat), sigma02
 0.0
 # component 1 initial <x> position, x01
@@ -116,7 +116,7 @@ none
 # imaginary time rotation frequency, omegaimag
 0.05
 # real time rotation rate, omegareal
-0.04
+0.05
 # damping rate, tgamma #NOT YET IMPLEMENTED
 0.0
 # rotate in imaginary time?, irotate

@@ -1,0 +1,11 @@
+# Quantum Fisher information plot
+# For use with fisherrun.sh
+# Assume first argument is the root directory containing the data file
+
+set terminal postscript enhanced eps color
+set output ARG1."/"."QFI.eps"
+
+set key top left
+
+plot ARG1."/"."quantum_fisher_info.dat" using 2:3 with lines title "QFI",\
+     ARG1."/"."classical_fisher_info.dat" using 2:3 with lines title "CFI

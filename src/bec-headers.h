@@ -1555,24 +1555,24 @@ vector<double> &potential2
 	unsigned int j;
     outfile.close();
 	outfile.open(filename);
-	outfile << "#x\t\t\t\t|psi1|^2\t\t\tRe(psi1)\t\t\tIm(psi1)\t\t\tV1(x,t)\t\t\t"
-				"phase(psi)\t\t\t|psi2|^2\t\t\tRe(psi2)\t\t\tIm(psi2)\t\t\tV2(x,t)"
-				"\t\t\tfreq\t\t\txrotating\n" 
+	outfile << "#x\t|psi1|^2\tRe(psi1)\tIm(psi1)\tV1(x,t)\t"
+				"phase(psi)\t|psi2|^2\tRe(psi2)\tIm(psi2)\tV2(x,t)"
+				"\tfreq\txrotating\n" 
 			<< endl;
 
 	for(j=0;j<xgrid.size();j++)
 	{
 		outfile << setw(8) 
                 << xgrid.at(j) // 1
-                << "\t\t" << pow(abs(waveform1[j]),2.0) // 2
-			 	<< "\t\t" << real(waveform1[j])  // 3
-                << "\t\t" << imag(waveform1[j])  // 4
-                << "\t\t" << potential1[j] // 5
-                << "\t\t" << atan2(imag(waveform1[j]),real(waveform1[j]))/PI // 6
-				<< "\t\t" << pow(abs(waveform2[j]),2.0)  // 7
-                << "\t\t" << real(waveform2[j])   // 8
-                << "\t\t" << imag(waveform2[j]) // 9
-				<< "\t\t" << potential2[j]   // 10
+                << "\t" << pow(abs(waveform1[j]),2.0) // 2
+			 	<< "\t" << real(waveform1[j])  // 3
+                << "\t" << imag(waveform1[j])  // 4
+                << "\t" << potential1[j] // 5
+                << "\t" << atan2(imag(waveform1[j]),real(waveform1[j]))/PI // 6
+				<< "\t" << pow(abs(waveform2[j]),2.0)  // 7
+                << "\t" << real(waveform2[j])   // 8
+                << "\t" << imag(waveform2[j]) // 9
+				<< "\t" << potential2[j]   // 10
 				<< "\n";
 	}
     outfile.close();

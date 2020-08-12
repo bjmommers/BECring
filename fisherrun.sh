@@ -4,7 +4,7 @@
 
 # The rotation rate is taken as the central value, and two
 #   extra sims are run with slightly higher and lower
-#   rotation rates in order to allow finite-differencing
+#   rotation rates in order to allow central finite-differencing
 #   for calculation of Fisher information
 
 
@@ -16,14 +16,18 @@ infile="temp-input.txt"
 outfile="output.txt"
 #outdir should be defined here, but is replaced later
 outdir="data/fisher-output-error"
+rootdir="data/fisher-test"
 animate=0
 animaterealtime=0
 animateimagtime=0
 denphase=0
 realimag=0
 video=0
-keepframes=0
+# frames needed for quantum Fisher info, so enabled by default
+keepframes=1
 batch=0
+# add the -qfi flag to compute the quantum Fisher info (comp. expensive)
+computeqfi=0
 
 # Default delta: the value to offset the rotation rate by
 #   for finite-differencing
@@ -38,7 +42,6 @@ PARAMS=""
 
 while (( "$#" )); do
   case "$1" in
-    -
     -i|--input)
       # do nothing, infile must be 'temp-input.txt'
       #infile=$2
@@ -49,7 +52,7 @@ while (( "$#" )); do
       shift 2
       ;;
     -d|--dir)
-      outdir="data/$2"
+      rootdir="data/$2"
       shift 2
       ;;
     -D|--delta|--Delta)
@@ -99,6 +102,10 @@ while (( "$#" )); do
       shift
     #batch mode currently unused
       ;;
+    -qfi)
+      computeqfi=1
+      shift
+      ;;
     --) # end argument parsing
       shift
       break
@@ -119,7 +126,6 @@ done
 eval set -- "$PARAMS"
 
 ################################################################################
-
 #LOOP
 # By looping over -1,0,1; we can use the iterator $j to modify out rotation rate
 for j in {-1..1}
@@ -132,25 +138,19 @@ do
     # Set the appropriate output directory
     case $j in
         -1)
-            outdir="data/fisher-output-minus"
+            outdir="$rootdir/fisher-output-minus"
             ;;
         0)
-            outdir="data/fisher-output-omega"
+            outdir="$rootdir/fisher-output-omega"
             ;;
         1)
-            outdir="data/fisher-output-plus"
+            outdir="$rootdir/fisher-output-plus"
             ;;
         *)
             echo "ERROR: unexpected Fisher loop value!"
             exit
     esac
 
-    # Create a temporary input file from the provided fisher-input.txt
-    touch temp-input.txt
-    cat fisher-input.txt > temp-input.txt
-    # Replace the rotation rate with the calculated value
-    sed -i "/omegareal/{n;s/.*/0$newomega/;}" temp-input.txt
-    sed -i "/omegaimag/{n;s/.*/0$newomega/;}" temp-input.txt
 
 
     #RUN
@@ -159,15 +159,30 @@ do
     if [ -d "$outdir" ]; then
         rm -rf "$outdir"
     fi
-    mkdir "$outdir"
-    mkdir "$outdir/frames"
-    mkdir "$outdir/iframes"
+    mkdir -p "$outdir"
+    mkdir -p "$outdir/frames"
+    mkdir -p "$outdir/iframes"
+    # root directory 
+    cd "$rootdir"
 
+    # Create a temporary input file from the provided fisher-input.txt
+    touch temp-input.txt
+    cat ../../fisher-input.txt > temp-input.txt
+    # Replace the rotation rate with the calculated value
+    sed -i "/omegareal/{n;s/.*/0$newomega/;}" temp-input.txt
+    sed -i "/omegaimag/{n;s/.*/0$newomega/;}" temp-input.txt
+
+    # Store delta in a file for reference
+    echo "$delta" > "fisher-delta.dat"
+
+
+    cd ../..
     #copy input file to output dir (for reference)
-    cp $infile "$outdir/input.txt"
+    cp fisher-input.txt "$outdir/input.txt"
 
     #run the code
-    ./src/becring "$infile" "$outfile" "$outdir" >& "$outdir/stdout.txt" 2> "$outdir/stderr.txt" ;
+    ./src/becring "$rootdir/$infile" "$outfile" "$outdir" >& "$outdir/stdout.txt" 2> "$outdir/stderr.txt" ;
+
 
 
     ################################################################################
@@ -178,6 +193,7 @@ do
 
     #switch to output directory for plotting
     cd $outdir
+    
 
     # produce statplot
     gnuplot -c statplot.gpi $outfile "output" "1D simulation"
@@ -293,7 +309,22 @@ do
         cd ..
     fi
 
+    # Return to BECring directory to start loop again
+    cd ../..
+
 done
+
+# Calculate Fisher info using Python script
+python3 src/fisher-info.py "$rootdir" "$computeqfi"
+
+# Plot classical fisher information
+gnuplot -c src/cfi-plot.gpi "$rootdir"
+
+if [ $computeqfi -eq 1 ]; then
+    gnuplot -c src/qfi-plot.gpi "$rootdir";
+fi
+
+
 # all done
 # Uncomment the following line to send a desktop notification on completion
 #notify-send "BECring: calculation complete"
