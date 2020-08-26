@@ -3,3 +3,4 @@ src/compile-report.txt
 data/**
 batch/**
 **.swp
+fisher-input-template.txt

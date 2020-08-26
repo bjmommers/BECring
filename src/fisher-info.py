@@ -6,8 +6,9 @@
 import sys
 import pandas as pd
 import numpy as np
+import math
 
-print("Calculating Fisher information...")
+#print("Calculating Fisher information...")
 
 # Use the first argument as the root directory
 root_dir = sys.argv[1]
@@ -40,52 +41,61 @@ cfi_finite_diff = densitytime_plus.sub(densitytime_minus)/(2.0*delta_omega)
 # Construct the integrand
 cfi_integrand = ((cfi_finite_diff ** 2.0)/densitytime_omega)*dx
 # Integrate by summing over row contents (i.e. over space)
-cfi = cfi_integrand.sum(axis=1)
+cfi = pd.DataFrame(cfi_integrand.sum(axis=1),columns=['CFI'])
+#cfi = cfi_integrand.sum(axis=1)
 # Combine CFI and time into a neat data file for plotting with gnuplot
 cfi_time = pd.concat([time,cfi],axis=1)
 cfi_time.to_csv(root_dir + "/classical_fisher_info.dat",sep='\t')
 
 
 # Check we want to calculate QFI, otherwise exit gracefully
-if int(sys.argv[2]) != 1:
-    print("Skipping QFI calculation...")
-    sys.exit()
+if int(sys.argv[2]) == 1:
 
+    # Now calculate the quantum Fisher info
 
+    # Start by declaring a dataframe
+    qfi_time = pd.DataFrame({'time':[], 'QFI':[]})
 
-# Now calculate the quantum Fisher info
+    # Iterate through files for the complex wavefunction
+    for t in range(0,len(cfi_time.index)):
 
-# Start by declaring a dataframe
-qfi_time = pd.DataFrame({'time':[], 'QFI':[]})
+        #load files
+        frame_data_minus = pd.read_csv(root_dir + "/fisher-output-minus/frames/frame{:05d}.dat".format(t),sep='\t')
+        frame_data_omega = pd.read_csv(root_dir + "/fisher-output-omega/frames/frame{:05d}.dat".format(t),sep='\t')
+        frame_data_plus = pd.read_csv(root_dir + "/fisher-output-plus/frames/frame{:05d}.dat".format(t),sep='\t')
 
-# Iterate through files for the complex wavefunction
-for t in range(0,len(cfi_time.index)):
+        #create dataframes that contain the complex wavefunction
+        wavefunction_minus = frame_data_minus["Re(psi1)"] + frame_data_minus["Im(psi1)"] * 1j
+        wavefunction_omega = frame_data_omega["Re(psi1)"] + frame_data_omega["Im(psi1)"] * 1j
+        wavefunction_plus = frame_data_plus["Re(psi1)"] + frame_data_plus["Im(psi1)"] * 1j
 
-    #load files
-    frame_data_minus = pd.read_csv(root_dir + "/fisher-output-minus/frames/frame{:05d}.dat".format(t),sep='\t')
-    frame_data_omega = pd.read_csv(root_dir + "/fisher-output-omega/frames/frame{:05d}.dat".format(t),sep='\t')
-    frame_data_plus = pd.read_csv(root_dir + "/fisher-output-plus/frames/frame{:05d}.dat".format(t),sep='\t')
+        #calculate central finite difference of wavefunction 
+        wf_finite_diff = (wavefunction_plus - wavefunction_minus)/(2.0*delta_omega)
 
-    #create dataframes that contain the complex wavefunction
-    wavefunction_minus = frame_data_minus["Re(psi1)"] + frame_data_minus["Im(psi1)"] * 1j
-    wavefunction_omega = frame_data_omega["Re(psi1)"] + frame_data_omega["Im(psi1)"] * 1j
-    wavefunction_plus = frame_data_plus["Re(psi1)"] + frame_data_plus["Im(psi1)"] * 1j
+        #compute the first term of the QFI
+        first_term = (np.conjugate(wf_finite_diff)*wf_finite_diff*dx).sum(axis=0)
 
-    #calculate central finite difference of wavefunction 
-    wf_finite_diff = (wavefunction_plus - wavefunction_minus)/(2.0*delta_omega)
+        #compute the second term of the QFI
+        second_term = pow(abs((np.conjugate(wavefunction_omega)*wf_finite_diff*dx).sum(axis=0)),2.0)
 
-    #compute the first term of the QFI
-    first_term = (np.conjugate(wf_finite_diff)*wf_finite_diff*dx).sum(axis=0)
+        #compute the final QFI for this timestep
+        qfi = 4.0*(first_term - second_term)
 
-    #compute the second term of the QFI
-    second_term = pow(abs((np.conjugate(wavefunction_omega)*wf_finite_diff*dx).sum(axis=0)),2.0)
+        #append time and QFI to final dataframe
+        #abs used to cast back to float for plotting, test data showed no imaginary component
+        qfi_time = qfi_time.append({'time':abs(cfi_time["time"][t]),'QFI':abs(qfi)},ignore_index=True)
 
-    #compute the final QFI for this timestep
-    qfi = 4.0*(first_term - second_term)
+    #Once the QFI dataframe has been filled, save it to file
+    qfi_time.to_csv(root_dir + "/quantum_fisher_info.dat",sep='\t')
 
-    #append time and QFI to final dataframe
-    #abs used to cast back to float for plotting, test data showed no imaginary component
-    qfi_time = qfi_time.append({'time':abs(cfi_time["time"][t]),'QFI':abs(qfi)},ignore_index=True)
+# End QFI block
 
-#Once the QFI dataframe has been filled, save it to file
-qfi_time.to_csv(root_dir + "/quantum_fisher_info.dat",sep='\t')
+#For M-LOOP, create a file containing the cost (1.0/max(CFI)) and uncertainty (central finite difference
+#   error is delta_omega**2)
+
+mloop_cost = 1.0/max(cfi_time["CFI"])
+mloop_uncer = delta_omega*delta_omega*math.pi
+
+mloop_outfile = open(root_dir + "/mloop_cost.txt",'w')
+mloop_outfile.write("M-LOOP_start\ncost = {cost}\nuncer = {uncer}\nM-LOOP_end".format(cost=mloop_cost, uncer=mloop_uncer))
+mloop_outfile.close()

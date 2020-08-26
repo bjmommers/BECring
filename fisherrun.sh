@@ -23,8 +23,7 @@ animateimagtime=0
 denphase=0
 realimag=0
 video=0
-# frames needed for quantum Fisher info, so enabled by default
-keepframes=1
+keepframes=0
 batch=0
 # add the -qfi flag to compute the quantum Fisher info (comp. expensive)
 computeqfi=0
@@ -94,7 +93,7 @@ while (( "$#" )); do
       shift
       ;;
     -f|--frames)
-      keepframes=1
+      keepframes=0
       shift
       ;;
     -b|batch)
@@ -196,24 +195,25 @@ do
     
 
     # produce statplot
-    gnuplot -c statplot.gpi $outfile "output" "1D simulation"
-    gnuplot -c trajectory-plot.gpi $outfile
+    gnuplot -c statplot.gpi $outfile "output" "1D simulation" 2> /dev/null
+    gnuplot -c trajectory-plot.gpi $outfile 2> /dev/null
 
     # produce phaseplot
     if [ -f "phasext.dat" ]; then
-        gnuplot -c phaseplot.gpi
-        gnuplot -c phaseplot-single.gpi
+        gnuplot -c phaseplot.gpi 2> /dev/null
+        gnuplot -c phaseplot-single.gpi 2> /dev/null
     fi
 
     if [ -f "modes.dat" ]; then
-        gnuplot -c modeplot.gpi
+        gnuplot -c modeplot.gpi 2> /dev/null
     fi
 
     if [ -f "modeampmatrix-abs.dat" ]; then
-        gnuplot -c histplot.gpi "modeampmatrix-abs.dat"
+        gnuplot -c histplot.gpi "modeampmatrix-abs.dat" 2> /dev/null
     fi
 
     # generate animations if -m flag set ONLY for central value of omega
+    # This case statement is obscure as hell, and I apologise
     if [ $animate -eq 1 ] && [ $j -eq 0 ]; then
         case "$denphase$realimag$video$animaterealtime$animateimagtime" in
             "00000")
@@ -295,15 +295,6 @@ do
         esac
     fi
 
-    #delete plots unless -f flag set
-    if [ $keepframes -eq 0 ]; then
-        if [ -e "frames/frame00000.dat" ]; then
-            rm -rf frames;
-        fi
-        if [ -e "iframes/iframe00000.dat" ]; then
-            rm -rf iframes;
-        fi
-    fi
     # revert back to home folder
     if [ -e "makemovies.sh" ]; then
         cd ..
@@ -325,6 +316,30 @@ if [ $computeqfi -eq 1 ]; then
 fi
 
 
+#delete plots unless -f flag set
+# This has to wait until the very end since frames are needed
+# to calculate the quantum Fisher information
+if [ $keepframes -eq 0 ]; then
+    if [ -e "$rootdir/fisher-output-minus/frames/frame00000.dat" ]; then
+        rm -rf "$rootdir/fisher-output-minus/frames";
+    fi
+    if [ -e "$rootdir/fisher-output-minus/iframes/iframe00000.dat" ]; then
+        rm -rf "$rootdir/fisher-output-minus/iframes";
+    fi
+    if [ -e "$rootdir/fisher-output-omega/frames/frame00000.dat" ]; then
+        rm -rf "$rootdir/fisher-output-minus/frames";
+    fi
+    if [ -e "$rootdir/fisher-output-omega/iframes/iframe00000.dat" ]; then
+        rm -rf "$rootdir/fisher-output-minus/iframes";
+    fi
+    if [ -e "$rootdir/fisher-output-plus/frames/frame00000.dat" ]; then
+        rm -rf "$rootdir/fisher-output-minus/frames";
+    fi
+    if [ -e "$rootdir/fisher-output-plus/iframes/iframe00000.dat" ]; then
+        rm -rf "$rootdir/fisher-output-minus/iframes";
+    fi
+fi
+    
 # all done
 # Uncomment the following line to send a desktop notification on completion
 #notify-send "BECring: calculation complete"
